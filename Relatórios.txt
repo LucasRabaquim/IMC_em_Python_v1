@@ -1,0 +1,12 @@
+
+==================================================
+RELATÓRIO DO DIA: 2022-02-19
+==================================================
+
+ Nome: Lucas
+ Turma: 2ºA Computação Quântica
+ Idade: 16
+ Peso: 60 kg 
+ Altura:1.80 metros 
+ Índice: 20.83
+ Considerado de: Magreza

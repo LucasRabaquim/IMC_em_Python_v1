@@ -1,22 +1,44 @@
-def info():
-    dadosPessoais = ["Nome",10,10]
-    perguntas = ["Digite seu nome: ", "Digite seu peso: ","Digite sua altura: "]
-    for i in range (len(perguntas)):
-        print(perguntas[i])
-        dadosPessoais[i] = input()
-    return dadosPessoais
+from datetime import date
+import sys 
+Cabecalho = open("Relatórios.txt", "a")
+print("\n" + 50*"=" + "\n" + "RELATÓRIO DO DIA: " + str(date.today()) + "\n" + 50*"=" + "\n")
+Cabecalho.write("\n" + 50*"=" + "\n" + "RELATÓRIO DO DIA: " + str(date.today()) + "\n" + 50*"=" + "\n")
+Cabecalho.close()
 
-def calculo(peso,altura):
-    classificacao = ["Magreza grave","Magreza","Normalidade","Sobrepeso","Obesidade","Obesidade grave"]
-    medidaIndice = [17,18,26,29,30,31]
-    imc = round(peso/altura**altura,2)
-    c = 0
-    for i in range (len(classificacao)):
-        if(imc > medidaIndice[i]):
-            c = i
-    resultado = [imc,classificacao[c]] 
-    return resultado
+def Perguntar():
+    Sim = ["Sim","sim","S","s","SIM"]
+    if input("Deseja usar o Programa? S/N \n") in Sim:
+        Relatorio()
+    sys.exit()
 
-Dados = info()
-imc = calculo(float(Dados[1]),float(Dados[2]))
-print(Dados[0] + ", com " + Dados[1] + "KG e " + Dados[2] + " metros de altura possuí índice igual a " + str(imc[0]) + ", considerado de: " + str(imc[1]))
+def Relatorio():
+
+    def informacoes():
+        dadosPessoais = [("Nome").capitalize,"Curso",10,10,10]
+        global perguntas
+        perguntas = ["Digite seu nome: ","Digite sua turma: ","Digite sua idade: " , "Digite seu peso: ","Digite sua altura: "]
+        for i in range (len(perguntas)):
+            dadosPessoais[i] = input(perguntas[i])
+        return dadosPessoais
+
+    def calcular(peso,altura):
+        classificacao = ["Magreza grave","Magreza","Normalidade","Sobrepeso","Obesidade","Obesidade grave"]
+        medidaIndice = [17,18,24,29,30,31]
+        imc = round(peso/altura**altura,2)
+        c = 0
+        for i in range (len(classificacao)):
+            if(imc > medidaIndice[i]):
+                c = i
+        calculo = [imc,classificacao[c]] 
+        return calculo
+
+    Dados = informacoes()
+    imc = calcular(float((Dados[len(perguntas)-2]).replace(",",".")),float((Dados[len(perguntas)-1]).replace(",",".")))
+    Resultado = "\n" + " Nome: " + Dados[0]+"\n" + " Turma: " + Dados[1]+"\n" + " Idade: " + Dados[2]+"\n" + " Peso: " + Dados[3]+" kg \n" + " Altura:" + Dados[4]+" metros \n" + " Índice: " + str(imc[0])+"\n" + " Considerado de: " + str(imc[1])+"\n"
+    print(Resultado)
+    Relatorio = open("Relatórios.txt", "a")
+    Relatorio.write(Resultado)
+    Relatorio.close()
+    Perguntar()
+
+Relatorio()
